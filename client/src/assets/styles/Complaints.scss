@@ -1,0 +1,36 @@
+@import "../global/_mixin.scss";
+
+.complaints {
+  background-color: white !important;
+  border-radius: 10px;
+  border-radius: 10px;
+  padding: 20px;
+
+  section {
+    @include flex(space-between, center, row);
+
+    span {
+      color: grey
+    }
+
+    #right {
+      @include flex(center, center, row);
+
+      div {
+        @include flex(center, center, column);
+      }
+
+      div:nth-child(1) {
+        padding: 20px 32px;
+      }
+      div:nth-child(2) {
+        border-right: 1px solid rgba(0, 0, 0, 0.136);
+        height: 40px;
+        width: 0px;
+      }
+      div:nth-child(3) {
+        padding: 20px;
+      }
+    }
+  }
+}

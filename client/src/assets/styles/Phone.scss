@@ -1,0 +1,30 @@
+@import "../global/_mixin.scss";
+
+.phoneContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  @include backgroundImg;
+
+  .phoneMain {
+    padding: 40px 20px;
+    background-color: white;
+  }
+
+  .webTitle {
+    color: black;
+  }
+
+  .submitBtn{
+    margin-top: 20px !important;
+    background-color: #133475;
+    color: white;
+  }
+
+  .submitBtn:hover{
+    background-color: #fff;
+    border: 1px solid #133475;
+  }
+}

@@ -1,0 +1,30 @@
+.footerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    background: rgba(19, 52, 117, 0.9);
+    color: white;
+    margin-top: 9rem;
+
+    .footerLeft {
+        line-height: 60px;
+
+        .footerIcons {
+            display: flex;
+
+            .iconList {
+                margin-right: 20px;
+                transition: all 0.3s ease-in-out;
+            }
+
+            .iconList:hover {
+                transform: translateY(-10px) scale(1.1);
+            }
+        }
+    }
+
+    ul {
+        margin-bottom: 0 !important;
+    }
+}

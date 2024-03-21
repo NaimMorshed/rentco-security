@@ -1,0 +1,110 @@
+.homeFull {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100vh;
+
+  .homeContainer {
+    margin-top: 8rem;
+
+    .textArea {
+      .spanText {
+        color: #1dc5a7;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        margin-bottom: 10px;
+      }
+
+      .headerTitle {
+        color: #082f7ae5;
+        line-height: 78.09px;
+        font-size: 63px;
+
+        .spanGradient {
+          background: linear-gradient(
+            91.11deg,
+            #8450f3 -4.71%,
+            #a858e7 20.59%,
+            #57ebd0 50.53%,
+            #55e9d3 67.06%,
+            #81fbf3 91.92%
+          );
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+
+          display: inline-block;
+          overflow: hidden;
+          animation: typing 2s steps(15, end) infinite;
+        }
+
+        @keyframes typing {
+          from {
+            width: 0;
+          }
+          to {
+            width: 100%;
+          }
+        }
+
+        .spanDot {
+          color: #169780;
+        }
+      }
+
+      .spanDescription {
+        font-weight: 300;
+        font-size: 20px;
+        margin: 20px 0px;
+        display: inline-block;
+      }
+
+      .headerBtn {
+        margin-top: 15px;
+
+        .getStartBtn {
+          padding: 05px 30px 05px 30px;
+          border: 2px solid #133475e5;
+          background: rgba(19, 52, 117, 0.9);
+          border-radius: 5px;
+          color: white;
+          font-size: 20px;
+          font-weight: 600;
+          margin-right: 30px;
+          transition: all 0.2s ease-in-out;
+        }
+
+        .getStartBtn:hover {
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+          background-color: transparent;
+          color: #133475e5;
+        }
+
+        .loginBtn {
+          padding: 5px 40px 5px 40px;
+          background-color: transparent;
+          border: 2px solid #133475e5;
+          border-radius: 5px;
+          font-size: 20px;
+          font-weight: 600;
+          color: #133475e5;
+          transition: all 0.2s ease-in-out;
+        }
+
+        .loginBtn:hover {
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+          background: rgba(19, 52, 117, 0.9);
+          color: white;
+        }
+      }
+    }
+
+    .imgArea {
+      .headerImage {
+        width: 300px;
+        height: 300px;
+      }
+    }
+  }
+}

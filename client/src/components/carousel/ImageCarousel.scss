@@ -1,0 +1,37 @@
+.image-carousel {
+  position: relative;
+  max-width: 100%;
+  margin: auto;
+  overflow: hidden;
+
+  .carousel-image {
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s ease-in-out;
+    object-fit: cover;
+  }
+
+  .carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 44px;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .carousel-button:hover {
+    color: #ffc107; /* Change color on hover */
+  }
+
+  .carousel-button:first-child {
+    left: 10px;
+  }
+
+  .carousel-button:last-child {
+    right: 10px;
+  }
+}

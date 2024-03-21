@@ -1,0 +1,100 @@
+.dashBoardContainer {
+  text-align: center;
+  margin: 20px 0px 30px 0px;
+  padding: 10px;
+
+  .card {
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+
+    .card-body {
+      height: 10rem;
+
+      .card-title {
+        font-size: 1rem;
+        font-weight: 500;
+        display: block;
+      }
+
+      .card-text {
+        font-size: 1.5rem;
+      }
+
+      .taka-icon {
+        margin-bottom: 8px;
+      }
+    }
+  }
+
+  .card:hover {
+    transform: scale(1.1);
+  }
+}
+
+.flatContainer {
+  background-color: white;
+  padding: 30px 10px;
+  border-radius: 10px;
+  overflow-x: auto;
+
+  h4 {
+    margin-bottom: 20px;
+  }
+
+  .tableRow {
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+
+    .tenant-icon {
+      margin-right: 3px;
+      margin-bottom: 3px;
+    }
+  }
+}
+
+// media query
+@media screen and (max-width: 1057px) {
+  .card {
+    .card-title {
+      font-size: 14px !important;
+    }
+
+    .card-text {
+      font-size: 14px !important;
+    }
+
+    .taka-icon {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .card {
+    .card-title {
+      font-size: 1rem !important;
+    }
+
+    .card-text {
+      font-size: 1.5rem !important;
+    }
+
+    .taka-icon {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+@media screen and (min-aspect-ratio: 16/9) and (max-aspect-ratio: 4/3) {
+  th,
+  td {
+    font-size: 14px !important;
+  }
+}
+
+@media screen and (min-aspect-ratio: 4/3) {
+  th,
+  td {
+    font-size: 16px !important;
+  }
+}

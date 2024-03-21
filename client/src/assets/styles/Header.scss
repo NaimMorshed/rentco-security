@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@700&display=swap');
+
+.headerContainer{
+    height: 150px;
+    text-align: center;
+    position: relative;
+
+    .logo{
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        position: absolute;
+        left: 40%;
+        margin-top: -50px;
+    }
+
+    // @font-face {
+    //     font-family: Feelfree;
+    //     src: url(../fonts/FeelfreePersonalUseRegular-lg2Bw.ttf);
+    //   }
+    //   h2{
+    //     font-family: Feelfree;
+    //   }
+}

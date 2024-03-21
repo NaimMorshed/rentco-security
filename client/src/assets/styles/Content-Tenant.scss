@@ -1,0 +1,92 @@
+.content-tenant-container{
+
+    .content-tenant-heading{
+        margin: 30px 0px;
+
+        .content-tenant-title {
+            line-height: 10px;
+        }
+        
+        .content-tenant-sub-title {
+            opacity: 0.75;
+            font-weight: 400;
+            font-size: 14px;
+        }
+    }
+
+    .tenant-card-body{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .tenant-card-icon-div{
+            background-color: #114B7A;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #ffff;
+
+            .tenant-card-icon{
+                font-size: 30px;
+            }
+        }
+
+        .tenant-card-title{
+            .taka-icon{
+                font-size: 25px;
+                font-weight: 600;
+                margin-bottom: 10px;
+            }
+
+            .tenant-card-amount{
+                font-size: 25px;
+                font-weight: 600;
+            }
+
+            .tenant-card-sub-title{
+                opacity: .75;
+                font-size: 14px;
+                font-weight: 500;
+            }
+        }
+    }
+
+    // Landowner Information
+    .content-landowner-info-container{
+        margin: 50px 0px 10px 0px;
+
+        .landowner-info{
+            margin-bottom: 30px;
+
+            .view-profile-btn{
+                background-color: #114B7A;
+                color: #fff;
+                border-radius: 5px;
+                padding: 5px 8px;
+                border: 1px solid #114B7A;
+                font-size: 14px;
+
+                .view-profile-btn-icon{
+                    margin-bottom: 3px;
+                }
+            }
+        }
+
+        .landowner-info-card{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #FEFEFF;
+            padding: 30px;
+            border-radius: 10px;
+
+            .info{
+                margin-bottom: 10px;
+
+                .info-title {
+                    opacity: .85;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}

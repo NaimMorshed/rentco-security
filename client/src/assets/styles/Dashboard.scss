@@ -1,0 +1,191 @@
+@import "../global/_mixin.scss";
+@import url("https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@500&display=swap");
+
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+
+  aside {
+    background-color: #050a33;
+    color: white;
+    padding: 20px;
+    transition: all 0.3s ease-in-out;
+
+    .logo {
+      @include flex(center, center, row);
+      position: relative;
+
+      .closeMenu {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 20px;
+        transition: 0.4s ease-in-out;
+        :hover {
+          cursor: pointer;
+        }
+      }
+
+      img {
+        width: 30px;
+        height: 30px;
+      }
+      span {
+        font-family: "Edu NSW ACT Foundation", cursive;
+        font-size: large;
+        font-weight: bold;
+        margin-left: 5px;
+      }
+    }
+
+    .userInfo {
+      @include flex(center, center, column);
+      margin: 15px 0;
+
+      .userAvatar {
+        font-size: 60px;
+        img {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          border: 2px solid rgba(255, 255, 255, 0.792);
+        }
+      }
+      .userName {
+        font-size: 17px;
+        font-weight: bold;
+      }
+      .userType {
+        opacity: 0.8;
+      }
+    }
+
+    .navList {
+      .titleList {
+        opacity: 0.8;
+        font-size: 14px;
+        margin-top: 30px;
+      }
+      .rowItems {
+        :hover {
+          cursor: pointer;
+        }
+
+        div {
+          @include flex(none, center, row);
+          margin: 7px 0;
+          padding: 0 5px;
+          .iconItem {
+            font-size: 22px;
+            margin-right: 20px;
+          }
+          .contentItem {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            margin-top: 6px;
+            justify-content: space-between;
+            span:nth-child(1) {
+              font-size: 15px;
+            }
+            span:nth-child(2) {
+              margin-bottom: 2px;
+            }
+          }
+        }
+      }
+    }
+
+    .logoutDiv {
+      @include flex(center, center, row);
+      bottom: 0px;
+      left: 0;
+      position: fixed;
+      width: 300px;
+      height: 60px;
+      border-top: 1px solid rgb(179, 179, 179);
+      :hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  #mainContent {
+    background-color: #e3ece8;
+    width: 100%;
+
+    #dynamic {
+      padding: 10px;
+    }
+
+    .fixedHeader {
+      @include flex(space-between, center, row);
+      padding: 15px 25px;
+      background-color: white;
+      color: rgb(98, 98, 98);
+
+      .hamburgerMenu {
+        border: 1px solid #050a333b;
+        padding: 0px 8px 3px 7.5px;
+        border-radius: 3px;
+        margin-right: 10px;
+        :hover {
+          cursor: pointer;
+        }
+      }
+
+      div:nth-child(1) {
+        @include flex(center, center, row);
+        font-weight: bold;
+
+        span:nth-child(2) {
+          margin-bottom: 3px;
+        }
+
+        span:nth-child(4) {
+          color: #050a33;
+          font-size: large;
+        }
+      }
+      div:nth-child(2) {
+        @include flex(center, center, row);
+        font-size: 30px;
+        :nth-child(1) {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
+
+.itemSelected {
+  background-color: #464962;
+  border-radius: 5px;
+}
+
+// ----- Breakpoints -----
+
+@media only screen and (max-width: 600px) {
+}
+
+/* Small devices */
+@media only screen and (min-width: 600px) {
+  .dashboard > aside {
+    min-width: 80px;
+  }
+}
+
+/* Medium devices */
+@media only screen and (min-width: 768px) {
+  .dashboard > aside {
+    min-width: 300px;
+  }
+}
+
+/* Large devices */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices */
+@media only screen and (min-width: 1200px) {
+}

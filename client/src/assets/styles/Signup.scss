@@ -1,0 +1,39 @@
+@import "../global/_include.scss";
+
+.signUpForm {
+  display: flex;
+  flex-direction: column;
+
+  input[type="text"],
+  input[type="email"],
+  input[type="date"],
+  input[type="number"],
+  select {
+    background-color: rgb(230, 230, 230);
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    margin: 5px;
+    outline: none;
+  }
+
+  input[type="submit"] {
+    border: none;
+    margin-top: 20px;
+    border-radius: 3px;
+    padding: 10px 0;
+    background-color: #133475;
+    color: white;
+  }
+
+  // hide input number arrow icons
+  input[type="number"]::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+    /* Firefox */
+  }
+}

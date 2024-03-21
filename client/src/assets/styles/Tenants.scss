@@ -1,0 +1,61 @@
+.tenantsContainer{
+    margin-top: 30px;
+
+    .total{
+        .totalTenant{
+            color: gray;
+            font-weight: 400;
+        }
+    }
+    .titleSection{
+        display: flex;
+        justify-content: space-between;
+
+        .filter{
+            padding: 1px 12px;
+            background-color: #133475E5;
+            border-radius: 5px;
+            border: 1px solid #133475E5;
+            color: white;
+
+            .icon{
+                margin-bottom: 3px;
+                text-align: start;
+            }
+        }
+    }
+
+    .table-section{
+        overflow-x: auto;
+
+        .tenantTable {
+                background-color: white;
+                padding: 30px 10px;
+                border-radius: 5px;
+                margin-top: 30px;
+                text-align: center;
+        
+                .tenantPhoto {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 20px;
+                    object-fit: cover;
+                }
+        
+                .tableIcon {
+                    .icon {
+                        margin-right: 20px;
+                        cursor: pointer;
+                    }
+                }
+        
+                .viewBtn {
+                    background-color: #3BC1EB;
+                    border-radius: 5px;
+                    border: 1px solid #3BC1EB;
+                    color: white;
+                    padding: 3px 10px;
+                }
+            }
+    }
+}

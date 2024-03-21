@@ -1,0 +1,66 @@
+.create-apart-form{
+    form {
+            .apart-form {
+                display: flex;
+                justify-content: space-evenly;
+                flex-wrap: wrap;
+                margin-top: 20px;
+                text-align: left;
+    
+                .left-part,
+                .right-part {
+                    max-width: 400px;
+                }
+            }
+    
+            label {
+                display: block;
+                margin-bottom: 20px;
+    
+                input {
+                    width: 100%;
+                    padding: 8px;
+                }
+    
+            }
+    
+            .text-area-field {
+                max-width: 100%;
+    
+                textarea {
+                    width: 100%;
+                }
+            }
+    
+            button {
+                background-color: #114A7B;
+                width: 100%;
+                color: #ffff;
+                padding: 8px;
+                border: #114A7B;
+                border-radius: 5px;
+                margin: 40px 0px;
+                font-size: larger;
+            }
+    
+            .input-custom {
+                border: 1px solid rgb(109, 108, 108);
+                width: 100%;
+                padding: 8px;
+                box-sizing: border-box;
+                margin-bottom: 20px;
+                position: relative;
+                display: block;
+                cursor: pointer;
+    
+                select {
+                    background-image: none;
+                    border: none;
+                    outline: none;
+                    padding: 3px 0px;
+                    width: 100%;
+                    cursor: pointer;
+                }
+            }
+        }
+}

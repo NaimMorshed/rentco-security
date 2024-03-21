@@ -1,0 +1,102 @@
+.profile-container{
+  background-color: #FEFEFF;
+  padding: 30px;
+  border-radius: 10px;
+
+  .profile-info{
+    display: flex;
+    justify-content: space-between;
+
+    .profile-pic {
+        flex: 12%;
+        margin-right: 10px;
+      };
+    
+      .image-info {
+        flex: 38%;
+    
+        .profile-title {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        };
+    
+        .star-icon {
+          margin-top: -10px;
+        };
+    
+        .verify-button {
+          background: #050A33;
+          color: #ffff;
+          outline: none;
+          border: 1px solid #050A33;
+          padding: 8px 10px;
+          border-radius: 10px;
+        };
+      };
+
+      .edit-section{
+          flex: 50%;
+
+        .edit-profile, .edit-property {
+            text-align: end;
+            margin-bottom: 10px;
+        
+            .edit-profile-button, .edit-property-button {
+              outline: none;
+              border: none;
+              background-color: transparent;
+              opacity: 0.75;
+              color: gray;
+            }
+        
+          }
+
+      }
+  };
+
+  // Inner Profile Info
+  .inner-profile-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0px;
+    padding: 30px 0px;
+
+    .inner-title {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+  }
+
+  .info-title {
+    opacity: 0.75;
+    color: gray;
+    border-bottom: 1px solid gray;
+    padding-bottom: 10px;
+  };
+
+  // Previous History
+  .record-history{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+
+    .year{
+      font-size: 14px;
+      font-weight: 600;
+      background-color: #D8D8D9;
+      padding: 4px 8px;
+      border-radius: 3px;
+    };
+
+    .record-address{
+      opacity: 0.75;
+      color: gray;
+      font-size: 14px;
+    };
+  };
+
+};

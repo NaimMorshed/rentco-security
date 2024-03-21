@@ -1,0 +1,188 @@
+// Admin login page==========================================
+.login-container {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+
+  div {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        margin-bottom: 8px;
+      }
+
+      input {
+        padding: 8px;
+        margin-bottom: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button {
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+}
+
+// Header ============================================================
+
+.admin-header {
+  position: fixed;
+  height: 60px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #0056b3;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  justify-content: space-between;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  .header-icon {
+    color: white;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h4 {
+    color: white;
+    margin-left: 20px;
+  }
+}
+
+// Sidebar ===========================================================
+
+.admin-sidebar {
+  min-width: 200px;
+  height: 100%;
+  background-color: rgb(239, 239, 239);
+  padding: 20px;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  div {
+    display: flex;
+    padding: 10px 5px;
+    align-items: center;
+  }
+
+  div:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    background-color: rgb(225, 224, 224);
+  }
+
+  .sidebar-icons {
+    font-size: 25px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .admin-sidebar {
+    display: none;
+  }
+}
+
+// Main Content ======================================================
+
+.admin-main-content {
+  width: 100%;
+  height: 100%;
+  padding: 35px;
+  margin-top: 60px;
+  margin-left: 210px;
+}
+
+// User page =========================================================
+
+.user-header {
+  margin-bottom: 30px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  input[type="search"] {
+    padding: 10px 15px;
+    background-color: rgba(230, 229, 229, 0.968);
+    border: none;
+    border-radius: 5px;
+    border-bottom: 2px solid #0056b3;
+    outline: none;
+  }
+
+  .search-icon {
+    position: absolute;
+    top: 45%;
+    left: 180px;
+    transform: translateY(-50%);
+  }
+
+  .user-header-icon {
+    color: #0056b3;
+  }
+
+  .user-header-text {
+    font-size: 18px;
+    color: #0056b3;
+    margin-left: 5px;
+  }
+}
+
+.main-table {
+  .user-table-btn {
+    background-color: transparent;
+    border: none;
+    color: #0056b3;
+  }
+}
+
+// Update user =========================================================
+
+.update-user {
+  section {
+    div {
+      display: flex;
+      flex-direction: column;
+      margin: 12px 8px;
+
+      input {
+        padding: 3px;
+      }
+    }
+  }
+}
+

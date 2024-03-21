@@ -1,0 +1,152 @@
+[
+    {
+        "id": 1,
+        "name": "Lyndsie",
+        "address": "40 Fieldstone Pass",
+        "bedroom": 1,
+        "bathroom": 1,
+        "sqft": 1,
+        "img": "http://dummyimage.com/186x100.png/5fa2dd/ffffff",
+        "taka": 25000
+    },
+    {
+        "id": 2,
+        "name": "Silva",
+        "address": "5 Dwight Hill",
+        "bedroom": 2,
+        "bathroom": 2,
+        "sqft": 2,
+        "img": "http://dummyimage.com/143x100.png/cc0000/ffffff",
+        "taka": 27000
+    },
+    {
+        "id": 3,
+        "name": "Clim",
+        "address": "1 High Crossing Court",
+        "bedroom": 3,
+        "bathroom": 3,
+        "sqft": 3,
+        "img": "http://dummyimage.com/136x100.png/dddddd/000000",
+        "taka": 17000
+    },
+    {
+        "id": 4,
+        "name": "Katya",
+        "address": "5148 Scoville Way",
+        "bedroom": 4,
+        "bathroom": 4,
+        "sqft": 4,
+        "img": "http://dummyimage.com/170x100.png/5fa2dd/ffffff",
+        "taka":22500
+    },
+    {
+        "id": 5,
+        "name": "Mabelle",
+        "address": "5 Lerdahl Terrace",
+        "bedroom": 5,
+        "bathroom": 5,
+        "sqft": 5,
+        "img": "http://dummyimage.com/159x100.png/cc0000/ffffff",
+        "taka": 32000
+    },
+    {
+        "id": 6,
+        "name": "Graeme",
+        "address": "79055 Alpine Center",
+        "bedroom": 6,
+        "bathroom": 6,
+        "sqft": 6,
+        "img": "http://dummyimage.com/102x100.png/ff4444/ffffff",
+        "taka": 15000
+    },
+    {
+        "id": 7,
+        "name": "Bradan",
+        "address": "882 Graceland Trail",
+        "bedroom": 7,
+        "bathroom": 7,
+        "sqft": 7,
+        "img": "http://dummyimage.com/182x100.png/ff4444/ffffff",
+        "taka": 14000
+    },
+    {
+        "id": 8,
+        "name": "Katrina",
+        "address": "81 Corben Court",
+        "bedroom": 8,
+        "bathroom": 8,
+        "sqft": 8,
+        "img": "http://dummyimage.com/193x100.png/5fa2dd/ffffff",
+        "taka": 20000
+    },
+    {
+        "id": 9,
+        "name": "Harley",
+        "address": "887 Express Pass",
+        "bedroom": 9,
+        "bathroom": 9,
+        "sqft": 9,
+        "img": "http://dummyimage.com/133x100.png/cc0000/ffffff",
+        "taka": 22500
+    },
+    {
+        "id": 10,
+        "name": "Vanny",
+        "address": "31246 Dennis Lane",
+        "bedroom": 10,
+        "bathroom": 10,
+        "sqft": 10,
+        "img": "http://dummyimage.com/185x100.png/cc0000/ffffff",
+        "taka": 21500
+    },
+    {
+        "id": 11,
+        "name": "Richardo",
+        "address": "469 Dunning Terrace",
+        "bedroom": 11,
+        "bathroom": 11,
+        "sqft": 11,
+        "img": "http://dummyimage.com/219x100.png/5fa2dd/ffffff",
+        "taka": 16000
+    },
+    {
+        "id": 12,
+        "name": "Quinlan",
+        "address": "51943 Kingsford Avenue",
+        "bedroom": 12,
+        "bathroom": 12,
+        "sqft": 12,
+        "img": "http://dummyimage.com/137x100.png/cc0000/ffffff",
+        "taka": 14000
+    },
+    {
+        "id": 13,
+        "name": "Isacco",
+        "address": "3048 West Circle",
+        "bedroom": 13,
+        "bathroom": 13,
+        "sqft": 13,
+        "img": "http://dummyimage.com/146x100.png/5fa2dd/ffffff",
+        "taka": 30000
+    },
+    {
+        "id": 14,
+        "name": "Webster",
+        "address": "35 Bellgrove Park",
+        "bedroom": 14,
+        "bathroom": 14,
+        "sqft": 14,
+        "img": "http://dummyimage.com/195x100.png/dddddd/000000",
+        "taka": 23000
+    },
+    {
+        "id": 15,
+        "name": "Bobbie",
+        "address": "801 Sheridan Drive",
+        "bedroom": 15,
+        "bathroom": 15,
+        "sqft": 15,
+        "img": "http://dummyimage.com/152x100.png/dddddd/000000",
+        "taka": 11000
+    }
+]

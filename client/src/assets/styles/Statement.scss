@@ -1,0 +1,163 @@
+.statement-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .search-statement {
+        background-color: #FEFFFE;
+        padding: 6px 12px;
+        border-radius: 8px;
+
+        .search-icon {
+            margin-bottom: 3px;
+            color: gray;
+            font-weight: 600;
+        }
+
+        .search-statement-field {
+            outline: none;
+            border: none;
+            background-color: transparent;
+        }
+    }
+}
+
+// Filter Area
+.filter-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #FEFFFE;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 15px;
+
+    .view-all-btn,
+    .clear-btn {
+        outline: none;
+        border: none;
+        background-color: transparent;
+        font-weight: 600;
+    }
+
+    ;
+
+    .category-btn,
+    .year-btn,
+    .month-btn {
+        outline: none;
+        border: none;
+        background-color: #F3F2F3;
+        padding: 5px 15px;
+        border-radius: 5px;
+    }
+}
+
+// monthly statement
+
+.monthly-statement {
+    margin-top: 30px;
+
+    ul {
+        padding-left: 0px;
+    }
+
+    .statement-list {
+        background-color: #FEFFFE;
+        margin-bottom: 10px;
+        padding: 30px 10px;
+        border-radius: 10px;
+
+        .statement-month {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        ;
+
+        .inner-list {
+            overflow-x: auto;
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 10px;
+
+                th,
+                td {
+                    border: 1px solid #ddd;
+                    padding: 8px;
+                    text-align: center;
+
+                    .details-btn {
+                        background-color: #11417B;
+                        color: #ffff;
+                        text-decoration: none;
+                        padding: 5px 10px;
+                        border-radius: 5px;
+                        border: 1px solid #11417B;
+                    }
+
+                    .details-btn:hover {
+                        background-color: black;
+                    }
+                }
+            }
+        }
+
+    }
+
+    ;
+}
+
+;
+
+// media query
+@media screen and (max-width: 958px) {
+    .details-btn {
+        padding: 5px 7px;
+        font-size: .9rem;
+    }
+}
+
+@media screen and (max-width: 958px) {
+    .filter-area {
+
+        .category-fld,
+        .year-fld,
+        .view-all-btn,
+        .year-fld,
+        .month-fld .clear-fld {
+            font-size: 14px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 880px) {
+    .filter-area {
+        flex-wrap: wrap;
+        gap: 20px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 775px) {
+    .statement-title {
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: 509px) {
+    .statement-month>h4 {
+        font-size: 14px !important;
+    }
+
+    td{
+        font-size: 14px !important;
+    }
+
+    .toggle-fld {
+        font-size: 12px !important;
+    }
+}
