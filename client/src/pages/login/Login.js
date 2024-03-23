@@ -1,18 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { BsFillTelephoneFill, BsGoogle } from "react-icons/bs";
 import { FaFacebookF } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
-
 import { signInWithPopup } from "firebase/auth";
 import { auth, google, facebook } from "../../firebase/firebase.config";
 import { UserContext } from "../../App";
-
-import "../../assets/styles/Login.scss";
 import axios from "axios";
-// import Loader from "../../components/loader/Loader";
+import "../../assets/styles/Login.scss";
 
 export default function Login() {
+
   const navigate = useNavigate();
 
   const [authentication, setAuthentication] = useContext(UserContext);
@@ -37,7 +35,9 @@ export default function Login() {
 
   const checkUserExistence = async (email) => {
     try {
-      const response = await axios.get(`http://localhost:5000/users/email/${email}`);
+      const response = await axios.get(
+        `http://localhost:5000/users/email/${email}`
+      );
 
       response.data.length === 0
         ? navigate("/signup", {
@@ -45,44 +45,9 @@ export default function Login() {
             state: { type: "social", phoneNumber: "" },
           })
         : navigateToDashboard(response.data[0]);
-
     } catch (error) {
       toast.error(error.message, { autoClose: 1700 });
     }
-  };
-
-  const SignInWithGoogle = () => {
-    signInWithPopup(auth, google)
-      .then((result) => {
-        const { email, displayName, photoURL } = result.user;
-        setAuthentication({
-          loggedIn: true,
-          email: email,
-          displayName: displayName,
-          photoUrl: photoURL,
-        });
-        checkUserExistence(email);
-      })
-      .catch((error) => {
-        toast.error(error.message, { autoClose: 5000 });
-      });
-  };
-
-  const SignInWithFacebook = () => {
-    signInWithPopup(auth, facebook)
-      .then((result) => {
-        const { email, displayName, photoURL } = result.user;
-        setAuthentication({
-          loggedIn: true,
-          email: email,
-          displayName: displayName,
-          photoUrl: photoURL,
-        });
-        checkUserExistence(email);
-      })
-      .catch((error) => {
-        toast.error(error.message, { autoClose: 5000 });
-      });
   };
 
   const updateAuth = async (data) => {
@@ -90,57 +55,47 @@ export default function Login() {
     await setAuthentication(true);
   };
 
+  // ================================+++===============================
+  // ==============================New Code============================
+  // ================================+++===============================
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+
+  const handleChange = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:5000/api/login', formData);
+      console.log('Login successful');
+      console.log('Token:', response.data.token);
+      navigate("/dashboard");
+      // Store token in localStorage and redirect or update state to logged in
+    } catch (error) {
+      console.error(error.response.data.message);
+    }
+  };
   return (
     <>
       <ToastContainer />
-      {/* <Loader loading={true} /> */}
       <div className="login">
         <div className="loginBox">
           <h2>RENTCO</h2>
 
-          {/* Phone */}
-          <div className="buttonDiv">
-            <button id="blueButton" onClick={() => navigate("/phone")}>
-              <BsFillTelephoneFill className="buttonIcon" />
-              Sign in with Phone
-            </button>
-          </div>
+          <form onSubmit={handleSubmit}>
+      <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
+      <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} />
+      <button type="submit">Login</button>
+    </form>
 
-          {/* Divider */}
-          <div className="divider">
-            <span>or</span>
-          </div>
-
-          {/* Facebook */}
-          <div>
-            <button
-              className="outlineButton"
-              onClick={() => SignInWithFacebook()}
-            >
-              <FaFacebookF className="buttonIcon" />
-              Sign in with Facebook
-            </button>
-          </div>
-
-          {/* Google */}
-          <div>
-            <button
-              className="outlineButton"
-              onClick={() => SignInWithGoogle()}
-            >
-              <BsGoogle className="buttonIcon" />
-              Sign in with Google
-            </button>
-          </div>
-
-          {/* Terms of Service */}
-          <div className="termsOfService">
-            <p>
-              By continuing, you agree to our <span>Terms & Conditions.</span>
-            </p>
-          </div>
+    <Link to ="/signup">Don't Have an account?</Link>
         </div>
       </div>
     </>
   );
-}
+  }

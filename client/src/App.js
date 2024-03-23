@@ -9,15 +9,6 @@ export const UserContext = createContext();
 function App() {
   const [authentication, setAuthentication] = useState(false);
 
-  // useEffect(() => {
-  //   const user = JSON.parse(localStorage.getItem("user"));
-  //   if (user) {
-  //     setAuthentication(true);
-  //   } else {
-  //     setAuthentication(false);
-  //   }
-  // }, []);
-
   return (
     <>
       <UserContext.Provider value={[authentication, setAuthentication]}>

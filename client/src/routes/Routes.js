@@ -30,14 +30,7 @@ export default function Routes_() {
         <Route path="/phone" element={<Phone />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/payment/:data" element={<Main />} />
-        <Route
-          path="/signup"
-          element={
-            <ProtectedRoute loggedIn={authentication}>
-              <Signup />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
