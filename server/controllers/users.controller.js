@@ -52,10 +52,13 @@ exports.getUserByEmail = async (req, res) => {
 exports.postUser = async (req, res) => {
   try {
     const { username, email, password } = req.body;
-    const hashedPassword = hashPassword(password);
-    console.log(hashedPassword)
-    await Users.create({ username, email, password: hashedPassword });
-    return res.status(201).send({ message: 'User created successfully' });
+
+    // hash password
+    const saltRound = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(password, saltRound);
+    const user = await Users.create({ username, email, password: hashPassword });
+
+    return res.status(201).send({ message: 'User created successfully', token: await user.generateToken(), userId: user._id.toString() });
   } catch (error) {
     return res.status(401).send({ message: "Error: " + error.message });
   }
@@ -124,7 +127,7 @@ exports.updateUser = async (req, res) => {
 exports.login = async (req, res) => {
   const MAX_LOGIN_ATTEMPTS = 3; // Maximum allowed login attempts
   const LOCK_TIME_DURATION = 24 * 60 * 60 * 1000; // Lock duration in milliseconds (24 hours)
-  
+
   try {
     const { email, password } = req.body;
     const user = await Users.findOne({ email });
@@ -161,7 +164,10 @@ exports.login = async (req, res) => {
     user.failedLoginAttempts = 0;
     await user.save();
 
-    return res.status(200).send({ message: "Login successful." });
+    return res.status(200).send({
+      message: "Login successful.", token: await user.generateToken(),
+      userId: user._id.toString(),
+    });
 
   } catch (error) {
     return res.status(401).send({ message: error.message });
