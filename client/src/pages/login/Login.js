@@ -10,7 +10,6 @@ import axios from "axios";
 import "../../assets/styles/Login.scss";
 
 export default function Login() {
-
   const navigate = useNavigate();
 
   const [authentication, setAuthentication] = useContext(UserContext);
@@ -60,26 +59,27 @@ export default function Login() {
   // ================================+++===============================
 
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/login', formData);
-      console.log('Login successful');
-      console.log('Token:', response.data.token);
-      navigate("/dashboard");
+      const response = await axios.post("http://localhost:5000/users/login", formData);
+      alert(response.data.message);
+      // console.log("Token:", response.data.token);
+      // navigate("/dashboard");
       // Store token in localStorage and redirect or update state to logged in
     } catch (error) {
-      console.error(error.response.data.message);
+      alert(error.response.data.message);
     }
   };
+
   return (
     <>
       <ToastContainer />
@@ -88,14 +88,26 @@ export default function Login() {
           <h2>RENTCO</h2>
 
           <form onSubmit={handleSubmit}>
-      <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
-      <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} />
-      <button type="submit">Login</button>
-    </form>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+            <button type="submit">Login</button>
+          </form>
 
-    <Link to ="/signup">Don't Have an account?</Link>
+          <Link to="/signup">Don't Have an account?</Link>
         </div>
       </div>
     </>
   );
-  }
+}
