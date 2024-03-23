@@ -7,6 +7,7 @@ import { signInWithPopup } from "firebase/auth";
 import { auth, google, facebook } from "../../firebase/firebase.config";
 import { UserContext } from "../../App";
 import axios from "axios";
+import ReCAPTCHA from "react-google-recaptcha";
 import "../../assets/styles/Login.scss";
 
 export default function Login() {
@@ -40,9 +41,9 @@ export default function Login() {
 
       response.data.length === 0
         ? navigate("/signup", {
-            replace: true,
-            state: { type: "social", phoneNumber: "" },
-          })
+          replace: true,
+          state: { type: "social", phoneNumber: "" },
+        })
         : navigateToDashboard(response.data[0]);
     } catch (error) {
       toast.error(error.message, { autoClose: 1700 });
@@ -63,21 +64,34 @@ export default function Login() {
     password: "",
   });
 
+  const [isCaptchaVerified, setCaptchaVerified] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const onChange = (value) => {
+    if (value) {
+      setCaptchaVerified(true);
+    } else {
+      setCaptchaVerified(false);
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:5000/users/login",
-        formData
-      );
-      alert(response.data.message);
-      // console.log("Token:", response.data.token);
-      // navigate("/dashboard");
-      // Store token in localStorage and redirect or update state to logged in
+      if (isCaptchaVerified) {
+        const response = await axios.post("http://localhost:5000/users/login", formData);
+        alert(response.data.message);
+        console.log(response.data);
+        // console.log("Token:", response.data.token);
+        // navigate("/dashboard");
+        // Store token in localStorage and redirect or update state to logged in
+      }
+      else {
+        alert('Please complete the reCAPTCHA verification');
+      }
     } catch (error) {
       alert(error.response.data.message);
     }
