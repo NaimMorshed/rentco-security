@@ -1,6 +1,7 @@
 const Users = require("../models/userModel");
 const Tenant = require("../models/tenantModel");
 const Landowner = require("../models/landownerModel");
+const bcrypt = require('bcrypt');
 
 exports.getUser = async (req, res) => {
   try {
@@ -49,68 +50,16 @@ exports.getUserByEmail = async (req, res) => {
 };
 
 exports.postUser = async (req, res) => {
-  // try {
-  //   const { fullName, nickname, email, dob, gender, district, religion, phoneNumber, occupation, permanentAddress, profilePhoto, accountType } = req.body;
-  //   if (!fullName || !nickname || !email || !dob || !gender || !district || !religion || !phoneNumber || !profilePhoto || !accountType || !occupation || !permanentAddress)
-  //   return res.status(400).send({ message: "Body is empty!" });
-
-  //   // ---------- Check User Existence ---------
-
-  //   const userExistEmail = await Users.findOne({ email });
-  //   const userExistPhone = await Users.findOne({ phoneNumber });
-
-  //   if (userExistEmail) {
-  //     return res.status(400).send({ message: "User email already exist!" });
-  //   } else if (userExistPhone) {
-  //     return res.status(400).send({ message: "User phone already exist!" });
-  //   }
-
-  //   // -------- Create and get referenceID -------
-
-  //   let referenceId;
-
-  //   if (accountType === "Landowner") 
-  //     await Landowner.create({}).then(data => referenceId = data._id);
-  //   else if (accountType === "Tenant")
-  //     await Tenant.create({}).then(data => referenceId = data._id);
-  //   else 
-  //     return res.status(400).send({ message: "Error creating referenceId!" });
-    
-  //   // -------- Create New User --------
-
-  //   await Users.create({
-  //     referenceId,
-  //     fullName,
-  //     nickname,
-  //     email,
-  //     dob,
-  //     gender,
-  //     district,
-  //     religion,
-  //     occupation,
-  //     permanentAddress,
-  //     phoneNumber,
-  //     profilePhoto,
-  //     accountType,
-  //   });
-
-  //   return res.status(201).send({ message: "User created successfully!" });
-    
-  // } catch (error) {
-  //   return res.status(500).send({ message: error.message })
-  // }
-
-  // ================||=====================
-  // ============== SIGNUP =================
-  // ================||=====================
-
   try {
     const { username, email, password } = req.body;
-    await Users.create({ username, email, password });
+    const hashedPassword = hashPassword(password);
+    console.log(hashedPassword)
+    await Users.create({ username, email, password: hashedPassword });
     return res.status(201).send({ message: 'User created successfully' });
   } catch (error) {
     return res.status(401).send({ message: "Error: " + error.message });
   }
+
 };
 
 exports.deleteUser = async (req, res) => {
@@ -173,21 +122,62 @@ exports.updateUser = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
+  const MAX_LOGIN_ATTEMPTS = 3; // Maximum allowed login attempts
+  const LOCK_TIME_DURATION = 24 * 60 * 60 * 1000; // Lock duration in milliseconds (24 hours)
+  
   try {
     const { email, password } = req.body;
     const user = await Users.findOne({ email });
+
     if (!user) {
       return res.status(404).send({ message: 'User not found' });
     }
-    else if (password !== user.password) {
-      return res.status(401).send({ message: 'Invalid credentials' });
+
+    // Check if the account is currently locked
+    if (user.lockUntil > Date.now()) {
+      return res.status(401).send({ message: "Account is locked. Please try again later." });
     }
-    else {
-      return res.status(201).send({ message: 'Login successful', data: user });
+
+    // Verify password
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    if (!isPasswordCorrect) {
+      // Increment failed login attempts
+      user.failedLoginAttempts++;
+
+      // Lock the account if the maximum attempts are reached
+      if (user.failedLoginAttempts >= MAX_LOGIN_ATTEMPTS) {
+        user.lockUntil = Date.now() + LOCK_TIME_DURATION;
+        await user.save();
+        return res.status(401).send({ message: "Account locked due to too many failed login attempts." });
+      }
+
+      // Save updated failed login attempts count
+      await user.save();
+
+      return res.status(401).send({ message: "Incorrect password. Please try again." });
     }
-    // Here you would generate and send a JWT token
-    // res.json({ token: 'generated_token_here' });
+
+    // Reset failed login attempts on successful login
+    user.failedLoginAttempts = 0;
+    await user.save();
+
+    return res.status(200).send({ message: "Login successful." });
+
   } catch (error) {
     return res.status(401).send({ message: error.message });
+  }
+}
+
+async function hashPassword(password) {
+  try {
+    // Generate a salt with a cost factor of 10
+    const salt = await bcrypt.genSalt(10);
+
+    // Hash the password with the generated salt
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    return hashedPassword;
+  } catch (error) {
+    throw error;
   }
 }
