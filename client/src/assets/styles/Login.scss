@@ -10,69 +10,31 @@ $btnBgClrBlue: #133475;
 
   .loginBox {
     @include flex(center, center, column);
-    padding: 40px 30px;
+    padding: 40px 60px;
     background-color: white;
 
-    .divider {
-      span {
-        padding: 0 10px;
-        font-weight: bold;
+    form {
+      @include flex(center, center, column);
+
+      div {
+        display: flex;
+        flex-direction: column;
+        margin: 10px 0;
       }
-    }
 
-    button {
-      width: 350px;
-      padding: 15px 0;
-      margin: 10px 0;
-      border: none;
-      background-color: $btnBgColor;
-      border-radius: 5px;
-      position: relative;
-    }
+      input {
+        border-bottom: 2px solid rgba(0, 0, 0, 0.378);
+        outline: none;
+        padding: 5px 0 5px 30px;
+      }
 
-    #blueButton {
-      border: 2px solid #133475;
-      background-color: #133475;
-      color: white;
-      transition: 0.2s all ease-in-out;
-    }
-
-    #blueButton:hover {
-      border: 2px solid #133475;
-      background-color: white;
-      color: #133475;
-    }
-
-    .outlineButton {
-      border: 2px solid #133475;
-      background-color: white;
-      color: #133475;
-      transition: 0.2s all ease-in-out;
-    }
-
-    .outlineButton:hover {
-      background-color: #133475;
-      color: white;
-    }
-
-    .buttonIcon {
-      font-size: 25px;
-      position: absolute;
-      left: 20px;
-    }
-
-    .termsOfService {
-      margin-top: 40px;
-
-      p {
-        max-width: 400px;
-        text-align: center;
-        font-size: small;
-
-        span {
-          text-decoration: underline;
-          color: rgb(116, 116, 116);
-        }
+      button {
+        background-color: #133475;
+        color: white;
+        border-radius: 5px;
+        width: 100%;
+        margin: 10px 0 20px 0;
+        padding: 5px;
       }
     }
   }

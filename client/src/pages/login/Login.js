@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { BsFillTelephoneFill, BsGoogle } from "react-icons/bs";
-import { FaFacebookF } from "react-icons/fa";
+import { FiUser } from "react-icons/fi";
+import { MdLockOutline } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import { signInWithPopup } from "firebase/auth";
 import { auth, google, facebook } from "../../firebase/firebase.config";
@@ -70,7 +70,10 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/users/login", formData);
+      const response = await axios.post(
+        "http://localhost:5000/users/login",
+        formData
+      );
       alert(response.data.message);
       // console.log("Token:", response.data.token);
       // navigate("/dashboard");
@@ -85,23 +88,49 @@ export default function Login() {
       <ToastContainer />
       <div className="login">
         <div className="loginBox">
-          <h2>RENTCO</h2>
+          <h2>Login</h2>
 
           <form onSubmit={handleSubmit}>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-            />
+            <div>
+              <label htmlFor="email">Email</label>
+              <div style={{ position: "relative" }}>
+                <FiUser
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "8px",
+                    transform: "translateY(-50%)",
+                  }}
+                />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="rentco@gmail.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div>
+              <label htmlFor="password">Password</label>
+              <div style={{ position: "relative" }}>
+                <MdLockOutline
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "8px",
+                    transform: "translateY(-50%)",
+                  }}
+                />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Type your password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
             <button type="submit">Login</button>
           </form>
 
