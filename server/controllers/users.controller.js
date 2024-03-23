@@ -109,7 +109,7 @@ exports.postUser = async (req, res) => {
     await Users.create({ username, email, password });
     return res.status(201).send({ message: 'User created successfully' });
   } catch (error) {
-    return res.status(401).send({ message: error.message });
+    return res.status(401).send({ message: "Error: " + error.message });
   }
 };
 
