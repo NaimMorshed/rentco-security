@@ -145,6 +145,10 @@ export default function Login() {
                 />
               </div>
             </div>
+            <ReCAPTCHA
+              sitekey="6LdLg6IpAAAAAO5v9H274lm5_4CFMK-lVS6sXNWE"
+              onChange={onChange}
+            />
             <button type="submit">Login</button>
           </form>
 
