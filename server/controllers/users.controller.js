@@ -1,7 +1,8 @@
 const Users = require("../models/userModel");
 const Tenant = require("../models/tenantModel");
 const Landowner = require("../models/landownerModel");
-const bcrypt = require('bcrypt');
+
+const bcrypt = require("bcrypt");
 
 exports.getUser = async (req, res) => {
   try {
@@ -56,13 +57,20 @@ exports.postUser = async (req, res) => {
     // hash password
     const saltRound = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, saltRound);
-    const user = await Users.create({ username, email, password: hashPassword });
+    const user = await Users.create({
+      username,
+      email,
+      password: hashPassword,
+    });
 
-    return res.status(201).send({ message: 'User created successfully', token: await user.generateToken(), userId: user._id.toString() });
+    return res.status(201).send({
+      message: "User created successfully",
+      token: await user.generateToken(),
+      userId: user._id.toString(),
+    });
   } catch (error) {
     return res.status(401).send({ message: "Error: " + error.message });
   }
-
 };
 
 exports.deleteUser = async (req, res) => {
@@ -73,9 +81,9 @@ exports.deleteUser = async (req, res) => {
     if (user) {
       // Delete reference
       if (user.accountType === "Landowner")
-        await Landowner.deleteOne({ _id: user.referenceId })
+        await Landowner.deleteOne({ _id: user.referenceId });
       else if (user.accountType === "Tenant")
-        await Tenant.deleteOne({ _id: user.referenceId })
+        await Tenant.deleteOne({ _id: user.referenceId });
       // Delete user
       await Users.deleteOne({ _id: id });
 
@@ -133,12 +141,14 @@ exports.login = async (req, res) => {
     const user = await Users.findOne({ email });
 
     if (!user) {
-      return res.status(404).send({ message: 'User not found' });
+      return res.status(404).send({ message: "User not found" });
     }
 
     // Check if the account is currently locked
     if (user.lockUntil > Date.now()) {
-      return res.status(401).send({ message: "Account is locked. Please try again later." });
+      return res
+        .status(401)
+        .send({ message: "Account is locked. Please try again later." });
     }
 
     // Verify password
@@ -151,13 +161,17 @@ exports.login = async (req, res) => {
       if (user.failedLoginAttempts >= MAX_LOGIN_ATTEMPTS) {
         user.lockUntil = Date.now() + LOCK_TIME_DURATION;
         await user.save();
-        return res.status(401).send({ message: "Account locked due to too many failed login attempts." });
+        return res.status(401).send({
+          message: "Account locked due to too many failed login attempts.",
+        });
       }
 
       // Save updated failed login attempts count
       await user.save();
 
-      return res.status(401).send({ message: "Incorrect password. Please try again." });
+      return res
+        .status(401)
+        .send({ message: "Incorrect password. Please try again." });
     }
 
     // Reset failed login attempts on successful login
@@ -165,14 +179,14 @@ exports.login = async (req, res) => {
     await user.save();
 
     return res.status(200).send({
-      message: "Login successful.", token: await user.generateToken(),
+      message: "Login successful.",
+      token: await user.generateToken(),
       userId: user._id.toString(),
     });
-
   } catch (error) {
     return res.status(401).send({ message: error.message });
   }
-}
+};
 
 async function hashPassword(password) {
   try {
@@ -187,3 +201,5 @@ async function hashPassword(password) {
     throw error;
   }
 }
+
+
