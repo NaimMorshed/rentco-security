@@ -1,7 +1,9 @@
 const { serverPort } = require("./secret");
 const connectDB = require("./config/db");
 const express = require("express");
+const helmet = require('helmet');
 const nodemailer = require("nodemailer");
+const rateLimit = require('express-rate-limit');
 const app = express();
 const cors = require("cors");
 
@@ -19,6 +21,33 @@ const chainingRoutes = require("./routes/chaining.routes");
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.json());
+
+// Use Helmet middleware
+app.use(helmet());
+
+// Set Content Security Policy (CSP) headers
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"], // Allow resources from the same origin
+      scriptSrc: ["'self'", "'unsafe-inline'", 'https://cdn.example.com'], // Allow scripts from the same origin and specific CDN
+      styleSrc: ["'self'", 'https://fonts.googleapis.com'], // Allow stylesheets from the same origin and Google Fonts
+      fontSrc: ["'self'", 'https://fonts.gstatic.com'], // Allow fonts from the same origin and Google Fonts
+      imgSrc: ["'self'", 'data:'], // Allow images from the same origin and data URIs
+      objectSrc: ["'none'"], // Disallow plugins like Flash
+      upgradeInsecureRequests: [], // Upgrade HTTP requests to HTTPS
+    },
+  })
+);
+
+// Apply rate limiting middleware
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this IP, please try again later',
+});
+
+app.use(limiter);
 
 app.use("/", defaultRouter);
 app.use("/users", userRouter);
