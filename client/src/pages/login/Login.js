@@ -84,10 +84,8 @@ export default function Login() {
       if (isCaptchaVerified) {
         const response = await axios.post("http://localhost:5000/users/login", formData);
         alert(response.data.message);
-        console.log(response.data);
-        // console.log("Token:", response.data.token);
-        // navigate("/dashboard");
-        // Store token in localStorage and redirect or update state to logged in
+        console.log("Data: ", response.data);
+        console.log("Token: ", response.data.token);
       }
       else {
         alert('Please complete the reCAPTCHA verification');
@@ -103,7 +101,6 @@ export default function Login() {
       <div className="login">
         <div className="loginBox">
           <h2>Login</h2>
-
           <form onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email">Email</label>
@@ -151,7 +148,6 @@ export default function Login() {
             />
             <button type="submit">Login</button>
           </form>
-
           <Link to="/signup">Don't Have an account?</Link>
         </div>
       </div>

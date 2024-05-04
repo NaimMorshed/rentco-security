@@ -54,24 +54,27 @@ exports.postUser = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    // hash password
-    const saltRound = await bcrypt.genSalt(10);
-    const hashPassword = await bcrypt.hash(password, saltRound);
-    const user = await Users.create({
-      username,
-      email,
-      password: hashPassword,
-    });
+    const userExist = await Users.findOne({ email });
 
-    return res.status(201).send({
-      message: "User created successfully",
-      token: await user.generateToken(),
-      userId: user._id.toString(),
-    });
+    if (userExist) {
+            throw new Error("A user already exists with this email address!");
+        };
+
+   // Hash Password
+        const hashPassword = await bcrypt.hash(password, 10);
+
+        const user = await Users.create({ username, email, password: hashPassword});
+
+        res.status(200).json({
+            success: true,
+            error: false,
+            message: 'User created successfully!'
+        })
   } catch (error) {
     return res.status(401).send({ message: "Error: " + error.message });
   }
 };
+
 
 exports.deleteUser = async (req, res) => {
   try {
@@ -132,6 +135,64 @@ exports.updateUser = async (req, res) => {
   }
 };
 
+// old code
+// exports.login = async (req, res) => {
+//   const MAX_LOGIN_ATTEMPTS = 3; // Maximum allowed login attempts
+//   const LOCK_TIME_DURATION = 24 * 60 * 60 * 1000; // Lock duration in milliseconds (24 hours)
+
+//   try {
+//     const { email, password } = req.body;
+//     const user = await Users.findOne({ email });
+
+//     if (!user) {
+//       return res.status(404).send({ message: "User not found" });
+//     }
+
+//     // Check if the account is currently locked
+//     if (user.lockUntil > Date.now()) {
+//       return res
+//         .status(401)
+//         .send({ message: "Account is locked. Please try again later." });
+//     }
+
+//     // Compare password
+//     const isPasswordCorrect = await bcrypt.compare(password, user.password);
+//     if (!isPasswordCorrect) {
+//       // Increment failed login attempts
+//       user.failedLoginAttempts++;
+
+//       // Lock the account if the maximum attempts are reached
+//       if (user.failedLoginAttempts >= MAX_LOGIN_ATTEMPTS) {
+//         user.lockUntil = Date.now() + LOCK_TIME_DURATION;
+//         await user.save();
+//         return res.status(401).send({
+//           message: "Account locked due to too many failed login attempts.",
+//         });
+//       }
+
+//       // Save updated failed login attempts count
+//       await user.save();
+
+//       return res
+//         .status(401)
+//         .send({ message: "Incorrect password. Please try again." });
+//     }
+
+//     // Reset failed login attempts on successful login
+//     user.failedLoginAttempts = 0;
+//     await user.save();
+
+//     return res.status(200).send({
+//       message: "Login successful.",
+//       token: await user.generateToken(),
+//       userId: user._id.toString(),
+//     });
+//   } catch (error) {
+//     return res.status(401).send({ message: error.message });
+//   }
+// };
+
+// new code
 exports.login = async (req, res) => {
   const MAX_LOGIN_ATTEMPTS = 3; // Maximum allowed login attempts
   const LOCK_TIME_DURATION = 24 * 60 * 60 * 1000; // Lock duration in milliseconds (24 hours)
@@ -144,39 +205,17 @@ exports.login = async (req, res) => {
       return res.status(404).send({ message: "User not found" });
     }
 
-    // Check if the account is currently locked
-    if (user.lockUntil > Date.now()) {
-      return res
-        .status(401)
-        .send({ message: "Account is locked. Please try again later." });
+    if (user.lockUntil && user.lockUntil > Date.now()) {
+      return res.status(401).send({ message: "Account is locked. Please try again later." });
     }
 
-    // Verify password
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) {
-      // Increment failed login attempts
-      user.failedLoginAttempts++;
-
-      // Lock the account if the maximum attempts are reached
-      if (user.failedLoginAttempts >= MAX_LOGIN_ATTEMPTS) {
-        user.lockUntil = Date.now() + LOCK_TIME_DURATION;
-        await user.save();
-        return res.status(401).send({
-          message: "Account locked due to too many failed login attempts.",
-        });
-      }
-
-      // Save updated failed login attempts count
-      await user.save();
-
-      return res
-        .status(401)
-        .send({ message: "Incorrect password. Please try again." });
+      handleFailedLogin(user, res);
+      return;
     }
 
-    // Reset failed login attempts on successful login
-    user.failedLoginAttempts = 0;
-    await user.save();
+    resetFailedLoginAttempts(user);
 
     return res.status(200).send({
       message: "Login successful.",
@@ -184,9 +223,29 @@ exports.login = async (req, res) => {
       userId: user._id.toString(),
     });
   } catch (error) {
-    return res.status(401).send({ message: error.message });
+    return res.status(500).send({ message: error.message });
   }
 };
+
+async function handleFailedLogin(user, res) {
+  user.failedLoginAttempts++;
+  if (user.failedLoginAttempts >= MAX_LOGIN_ATTEMPTS) {
+    user.lockUntil = Date.now() + LOCK_TIME_DURATION;
+    await user.save();
+    return res.status(401).send({
+      message: "Account locked due to too many failed login attempts.",
+    });
+  }
+
+  await user.save();
+
+  return res.status(401).send({ message: "Incorrect password. Please try again." });
+}
+
+async function resetFailedLoginAttempts(user) {
+  user.failedLoginAttempts = 0;
+  await user.save();
+}
 
 async function hashPassword(password) {
   try {
